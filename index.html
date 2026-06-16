@@ -1364,7 +1364,6 @@ async function kirimUcapan() {
     "https://script.google.com/macros/s/AKfycbx9K_H3i9CPlbiQ_qBpjRozHqD2KgRzX-MJnhFtzLlXMpsFNIlI82EcB2-uS-G7ZbI/exec",
     {
         method:"POST",
-    mode:"no-cors",
 
         body:JSON.stringify({
             nama,
@@ -1374,13 +1373,28 @@ async function kirimUcapan() {
     });
 
     alert("Terima kasih atas ucapannya 🤍");
-    location.reload();
 
-    document.getElementById("nama").value = "";
-    document.getElementById("ucapan").value = "";
+fetch("https://script.google.com/macros/s/AKfycbx9K_H3i9CPlbiQ_qBpjRozHqD2KgRzX-MJnhFtzLlXMpsFNIlI82EcB2-uS-G7ZbI/exec")
+  .then(res => res.json())
+  .then(data => {
 
-}
+    let html = "";
 
+    data.reverse().forEach(item => {
+      html += `
+        <div class="ucapan-item">
+          <h4>${item.nama}</h4>
+          <small>${item.kehadiran}</small>
+          <p>${item.ucapan}</p>
+        </div>
+      `;
+    });
+
+    document.getElementById("daftarUcapan").innerHTML = html;
+  });
+
+document.getElementById("nama").value = "";
+document.getElementById("ucapan").value = "";
 const fadeElements =
 document.querySelectorAll(".fade-up");
 

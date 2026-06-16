@@ -580,18 +580,23 @@ button:hover{
     transform:translateY(50px);
     transition:all 1s ease;
 }
+#daftarUcapan{
+    margin-top:30px;
+}
+
 .ucapan-item{
     background:white;
-    padding:20px;
-    margin:15px auto;
     max-width:500px;
+    margin:15px auto;
+    padding:20px;
     border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    text-align:left;
 }
 
 .ucapan-item h4{
     color:#c9a86a;
-    margin-bottom:5px;
+    margin:0;
 }
 
 .ucapan-item small{
@@ -1490,7 +1495,7 @@ document.getElementById("detik").innerText = seconds;
 
 </div>
     <script>
-fetch("https://script.google.com/macros/s/AKfycbyNEgxBZHXz2HS7wvplFLm5JcsoC8O0BYBVJCHmhx7ivHzHbp1HJUHFYZbYLp3nm80u/exec")
+fetch("https://script.google.com/macros/s/AKfycbx9K_H3i9CPlbiQ_qBpjRozHqD2KgRzX-MJnhFtzLlXMpsFNIlI82EcB2-uS-G7ZbI/exec")
   .then(res => res.json())
   .then(data => {
     let html = "";

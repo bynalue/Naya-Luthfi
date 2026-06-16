@@ -1001,9 +1001,7 @@ footer{
         </p>
 
         <p>
-            Dengan memohon rahmat dan ridho Allah SWT,
-            kami bermaksud menyelenggarakan acara pernikahan
-            putra-putri kami.
+           Ya Allah semoga ridho-Mu tercurah mengiringi pernikahan kami.
         </p>
 
     </div>
@@ -1343,7 +1341,6 @@ if(tamu){
     .innerText = tamu;
 
 }
-
 async function kirimUcapan() {
 
     const nama =
@@ -1364,7 +1361,7 @@ async function kirimUcapan() {
     "https://script.google.com/macros/s/AKfycbx9K_H3i9CPlbiQ_qBpjRozHqD2KgRzX-MJnhFtzLlXMpsFNIlI82EcB2-uS-G7ZbI/exec",
     {
         method:"POST",
-
+        mode:"no-cors",
         body:JSON.stringify({
             nama,
             kehadiran,
@@ -1372,29 +1369,38 @@ async function kirimUcapan() {
         })
     });
 
+    document.getElementById("nama").value = "";
+    document.getElementById("ucapan").value = "";
+
+    setTimeout(loadUcapan, 1000);
+
     alert("Terima kasih atas ucapannya 🤍");
 
-fetch("https://script.google.com/macros/s/AKfycbx9K_H3i9CPlbiQ_qBpjRozHqD2KgRzX-MJnhFtzLlXMpsFNIlI82EcB2-uS-G7ZbI/exec")
-  .then(res => res.json())
-  .then(data => {
+}
 
-    let html = "";
+function loadUcapan(){
 
-    data.reverse().forEach(item => {
-      html += `
-        <div class="ucapan-item">
-          <h4>${item.nama}</h4>
-          <small>${item.kehadiran}</small>
-          <p>${item.ucapan}</p>
-        </div>
-      `;
+  fetch("https://script.google.com/macros/s/AKfycbx9K_H3i9CPlbiQ_qBpjRozHqD2KgRzX-MJnhFtzLlXMpsFNIlI82EcB2-uS-G7ZbI/exec")
+    .then(res => res.json())
+    .then(data => {
+
+      let html = "";
+
+      data.reverse().forEach(item => {
+        html += `
+          <div class="ucapan-item">
+            <h4>${item.nama}</h4>
+            <small>${item.kehadiran}</small>
+            <p>${item.ucapan}</p>
+          </div>
+        `;
+      });
+
+      document.getElementById("daftarUcapan").innerHTML = html;
     });
 
-    document.getElementById("daftarUcapan").innerHTML = html;
-  });
-
-document.getElementById("nama").value = "";
-document.getElementById("ucapan").value = "";
+}
+    
 const fadeElements =
 document.querySelectorAll(".fade-up");
 
@@ -1510,23 +1516,10 @@ document.getElementById("detik").innerText = seconds;
 
 </div>
     <script>
-fetch("https://script.google.com/macros/s/AKfycbx9K_H3i9CPlbiQ_qBpjRozHqD2KgRzX-MJnhFtzLlXMpsFNIlI82EcB2-uS-G7ZbI/exec")
-  .then(res => res.json())
-  .then(data => {
-    let html = "";
-
-    data.reverse().forEach(item => {
-      html += `
-        <div class="ucapan-item">
-          <h4>${item.nama}</h4>
-          <small>${item.kehadiran}</small>
-          <p>${item.ucapan}</p>
-        </div>
-      `;
-    });
-
-    document.getElementById("daftarUcapan").innerHTML = html;
-  });
+loadUcapan();
 </script>
+    
+</div>
+>
 </body>
 </html>
